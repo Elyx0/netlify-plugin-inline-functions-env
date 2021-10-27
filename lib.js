@@ -10,8 +10,8 @@ function normalizeInputValue(singleOrArrayValue) {
 
 function isJsFunction({ runtime, extension, srcFile }) {
   return (
-    runtime === 'js' &&
-    extension === '.js' &&
+    (runtime === 'js' || runtime === 'ts') &&
+    (extension === '.js' || extension === '.ts') &&
     !srcFile.includes('/node_modules/')
   )
 }
