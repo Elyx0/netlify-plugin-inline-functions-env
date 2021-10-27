@@ -2,6 +2,7 @@ const fs = require('fs')
 const util = require('util')
 const babel = require('@babel/core')
 const inlinePlugin = require('babel-plugin-transform-inline-environment-variables')
+const tsPlugin = require('@babel/plugin-transform-typescript');
 const { normalizeInputValue, isJsFunction, getSrcFile, uniq } = require('./lib')
 const writeFile = util.promisify(fs.writeFile)
 
@@ -10,7 +11,7 @@ async function inlineEnv(path, options = {}, verbose = false) {
 
   const transformed = await babel.transformFileAsync(path, {
     configFile: false,
-    plugins: [babel.createConfigItem([inlinePlugin, options])],
+    plugins: [babel.createConfigItem([tsPlugin,inlinePlugin, options])],
     retainLines: true,
   })
 

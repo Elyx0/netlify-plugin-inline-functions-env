@@ -12,7 +12,7 @@ function isJsFunction({ runtime, extension, srcFile }) {
   return (
     (runtime === 'js' || runtime === 'ts') &&
     (extension === '.js' || extension === '.ts') &&
-    !srcFile.includes('/node_modules/')
+    !srcFile.includes('node_modules')
   )
 }
 
