@@ -1,8 +1,8 @@
-# netlify-plugin-inline-functions-env
+# netlify-plugin-inline-functions-env-typescript
 
-[![npm version](https://badge.fury.io/js/netlify-plugin-inline-functions-env.svg)](https://badge.fury.io/js/netlify-plugin-inline-functions-env)
+[![npm version](https://badge.fury.io/js/netlify-plugin-inline-functions-env-typescript.svg)](https://badge.fury.io/js/netlify-plugin-inline-functions-env-typescript)
 
-[![test status](https://github.com/bencao/netlify-plugin-inline-functions-env/workflows/UnitTest/badge.svg)](https://github.com/bencao/netlify-plugin-inline-functions-env/actions)
+[![test status](https://github.com/bencao/netlify-plugin-inline-functions-env-typescript/workflows/UnitTest/badge.svg)](https://github.com/bencao/netlify-plugin-inline-functions-env-typescript/actions)
 
 Inline build time environment variable values into netlify function code so that it becomes available at runtime.
 
@@ -83,19 +83,17 @@ So you may have to intentionlly convert the above code into something like `proc
 
 ## Install
 
-You can install this plugin in the Netlify UI from this [direct in-app installation link](https://app.netlify.com/plugins/netlify-plugin-inline-functions-env/install) or from the [Plugins directory](https://app.netlify.com/plugins).
-
-For file-based installation, add the following lines to your `netlify.toml` file:
+add the following lines to your `netlify.toml` file:
 
 ```toml
 [[plugins]]
-package = "netlify-plugin-inline-functions-env"
+package = "netlify-plugin-inline-functions-env-typescript"
 ```
 
 To complete file-based installation, from your project's base directory, use npm, yarn, or any other Node.js package manager to add the plugin to `devDependencies` in `package.json`.
 
 ```bash
-npm install -D netlify-plugin-inline-functions-env
+npm install -D netlify-plugin-inline-functions-env-typescript
 ```
 
 ## More Options
@@ -106,26 +104,18 @@ You can turn on verbose for debugging purpose by providing plugin inputs.
 
 ```toml
 [[plugins]]
-package = "netlify-plugin-inline-functions-env"
+package = "netlify-plugin-inline-functions-env-typescript"
   [plugins.inputs]
   verbose = "true"
+  inlineAll = "true"
 ```
+
+> `inlineAll` will try to find all the `.ts` or `.js` files in your FUNCTIONS_SRC directory
+
+It might be recommended in the case your entry function imports other files that
+use `process.env` in them. As it seems the original plugin did not replace alongside the dependency tree.
 
 > Be careful with verbose mode, as it will print the files with the replaced env variables
-
-### Configuring build event
-
-If you are using TypeScript, or processing your code in other ways you may want to choose `onBuild`
-
-```toml
-[[plugins]]
-package = "netlify-plugin-inline-functions-env"
-  [plugins.inputs]
-  buildEvent = "onBuild"
-```
-
-Default value is `onPreBuild`. It's also been tested to work with `onBuild`
-The values for buildEvent can be found [here](https://docs.netlify.com/configure-builds/build-plugins/create-plugins/#plug-in-to-build-events)
 
 ### Conditional Transformation
 
@@ -133,14 +123,14 @@ If you are using libraries such as [dotenv-defaults](https://github.com/mrsteele
 
 ```toml
 [[plugins]]
-package = "netlify-plugin-inline-functions-env"
+package = "netlify-plugin-inline-functions-env-typescript"
   [plugins.inputs]
   exclude = ["DO_NOT_TRANSFORM_ME", "DO_NOT_TRANSFORM_ME_2"]
 ```
 
 ```toml
 [[plugins]]
-package = "netlify-plugin-inline-functions-env"
+package = "netlify-plugin-inline-functions-env-typescript"
   [plugins.inputs]
   include = ["ONLY_TRANSFORM_ME", "ONLY_TRANSFORM_ME_2"]
 ```
@@ -151,4 +141,4 @@ package = "netlify-plugin-inline-functions-env"
 
 2. This plugin only replaces variables in the functions directory. Files outside the directory won't be modified.
 
-3. If you want to lock to a specific version(or a version that hasn't been accepted by netlify build system yet), please add `netlify-plugin-inline-functions-env` to your dev dependencies by `yarn install --dev netlify-plugin-inline-functions-env` or `npm install --save-dev netlify-plugin-inline-functions-env`.
+3. If you want to lock to a specific version(or a version that hasn't been accepted by netlify build system yet), please add `netlify-plugin-inline-functions-env-typescript` to your dev dependencies by `yarn install --dev netlify-plugin-inline-functions-env-typescript` or `npm install --save-dev netlify-plugin-inline-functions-env-typescript`.
