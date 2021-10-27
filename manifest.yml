@@ -8,3 +8,5 @@ inputs:
     description: Only tranform whitelisted environment variables
   - name: exclude
     description: Do not tranform selected environment variables
+  - name: inlineAll
+    description: inline process.env in every files in FUNCTIONS_SRC (besides node_modules)
