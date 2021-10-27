@@ -11,7 +11,7 @@ async function inlineEnv(path, options = {}, verbose = false) {
 
   const transformed = await babel.transformFileAsync(path, {
     configFile: false,
-    plugins: [babel.createConfigItem([tsPlugin,inlinePlugin, options])],
+    plugins: [babel.createConfigItem([tsPlugin, options]),babel.createConfigItem([inlinePlugin, options])],
     retainLines: true,
   })
 
