@@ -142,3 +142,4 @@ package = "netlify-plugin-inline-functions-env-typescript"
 2. This plugin only replaces variables in the functions directory. Files outside the directory won't be modified.
 
 3. If you want to lock to a specific version(or a version that hasn't been accepted by netlify build system yet), please add `netlify-plugin-inline-functions-env-typescript` to your dev dependencies by `yarn install --dev netlify-plugin-inline-functions-env-typescript` or `npm install --save-dev netlify-plugin-inline-functions-env-typescript`.
+4. THE PLUGIN CANNOT REPLACE process.env imported from OUTSIDE of the /functions/ repository. So I recommend putting SHARED_GLOBALS, in a `functions/shared_global.ts` and also create a `functions/backend_globals.ts` so then your frontend should be able to `import` the shared_globals while in `src/` from `../functions/shared_globals` (at least that's how I did for Gatsby + Netlify + Typescript) Good luck, hit me up if problems.
